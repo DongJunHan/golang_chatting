@@ -33,10 +33,10 @@ $(function(){
 
 	var addMessage = function(data){
 		var text = "";
-		if(!isBlank(data.name)){
-			text = '<strong>' + data.name + ':</strong>';
+		if(!isBlank(data.Name)){
+			text = '<strong>' + data.Name + ':</strong>';
 		}
-		text += data.msg;
+		text += data.Msg;
 		$chatlog.prepend('<div><span>'+text+'</span></div>');
 
 	};

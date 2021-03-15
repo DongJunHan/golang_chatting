@@ -19,6 +19,11 @@ func postMessageHandler(w http.ResponseWriter, r *http.Request){
 	sendMessage(name,msg)
 }
 
+func addUserHandler(w http.ResponseWriter, r *http.Request){
+	username := r.FormValue("name")
+	sendMessage("", fmt.Sprintf("add user : %s",username))
+}
+
 type Message struct{
 	Name string `json : "name"`
 	Msg string `json : "msg"`
@@ -36,10 +41,6 @@ func processMsgCh(es eventsource.EventSource){
 	}
 }
 
-func addUserHandler(w http.ResponseWriter, r *http.Request){
-	username := r.FormValue("name")
-	sendMessage("", fmt.Sprintf("add user : %s",username))
-}
 
 func main(){
 	msgCh = make(chan Message)
