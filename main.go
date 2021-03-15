@@ -41,7 +41,10 @@ func processMsgCh(es eventsource.EventSource){
 	}
 }
 
-
+func leftUserHandler(w http.ResponseWriter, r *http.Request){
+	username := r.FormValue("username")
+	sendMessage("", fmt.Sprintf("left user : %s",username))
+}
 func main(){
 	msgCh = make(chan Message)
 	es := eventsource.New(nil,nil)
@@ -52,7 +55,7 @@ func main(){
 	mux.Post("/messages", postMessageHandler)
 	mux.Handle("/stream",es)
 	mux.Post("/users",addUserHandler)
-
+	mux.Delete("/users", leftUserHandler)
 
 	n := negroni.Classic()
 	n.UseHandler(mux)

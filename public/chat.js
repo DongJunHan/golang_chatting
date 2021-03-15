@@ -51,4 +51,12 @@ $(function(){
 		var msg = JSON.parse(e.data);
 		addMessage(msg);
 	}
+
+	window.onbeforeunload = function(){
+		$.ajax({
+			url : "/users?username="+ username,
+			type : "DELETE"
+		});
+		es.close();
+	};
 });
